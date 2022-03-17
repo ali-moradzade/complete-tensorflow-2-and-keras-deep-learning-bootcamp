@@ -10,7 +10,7 @@ for dir in *
 do
 	if [ -d "$dir" ]
 	then
-		echo "$dir"
+		echo "processing $dir"
 		cd "$dir"
 		
 		for f in *.ipynb
@@ -19,11 +19,14 @@ do
 			then
 				if grep -q "Pierian_Data_Logo.png" "$f" || grep -q "../Pierian_Data_Logo.PNG" "$f"
 				then
-					echo "$f --> contains"
+ 					# echo "$f --> contains"
+					sed -i 's!../Pierian_Data_Logo.png!pierian-data-logo.png!' "$f"
+					sed -i 's!../Pierian_Data_Logo.PNG!pierian-data-logo.png!' "$f"
 				fi
 			fi
 		done
 
+		echo "Done."
 		echo
 		cd ..
 	fi
