@@ -1,0 +1,30 @@
+#!/bin/bash
+#=======================
+# Author : Ali Moradzade
+# Created: 2022/03/17
+#=======================
+
+#fix broken links
+
+for dir in *
+do
+	if [ -d "$dir" ]
+	then
+		echo "$dir"
+		cd "$dir"
+		
+		for f in *.ipynb
+		do
+			if [ -f "$f" ]
+			then
+				if grep -q "Pierian_Data_Logo.png" "$f" || grep -q "../Pierian_Data_Logo.PNG" "$f"
+				then
+					echo "$f --> contains"
+				fi
+			fi
+		done
+
+		echo
+		cd ..
+	fi
+done
